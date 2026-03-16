@@ -96,21 +96,43 @@ function showQuestion() {
     if (window.renderMathInElement) renderMathInElement(document.getElementById('quiz-game'), katexOptions);
 }
 
-function handleAnswer(sel, correct, btn) {
-    const btns = document.querySelectorAll('.quiz-option');
-    btns.forEach(b => b.disabled = true);
-    if (sel === correct) { btn.classList.add('correct'); score++; }
-    else {
-        btn.classList.add('wrong');
-        btns.forEach(b => { if (b.innerHTML === quizQuestions[currentIndex].options[correct]) b.classList.add('correct'); });
+function handleAnswer(selectedIndex, correctIndex, btnElement) {
+    // 1. Блокуємо всі кнопки, щоб не можна було клікати двічі
+    const buttons = document.querySelectorAll('.quiz-option');
+    buttons.forEach(b => b.disabled = true);
+
+    // Отримуємо текст ПРАВИЛЬНОЇ відповіді з масиву
+    const correctText = quizQuestions[currentIndex].options[correctIndex];
+
+    if (selectedIndex === correctIndex) {
+        // Якщо ВІРНО: робимо кнопку зеленою
+        btnElement.classList.remove('bg-white', 'border-slate-200');
+        btnElement.classList.add('bg-green-500', 'text-white', 'border-green-600', 'shadow-inner');
+        score++;
+    } else {
+        // Якщо НЕВІРНО: робимо обрану кнопку червоною
+        btnElement.classList.remove('bg-white', 'border-slate-200');
+        btnElement.classList.add('bg-red-500', 'text-white', 'border-red-600', 'shadow-inner');
+
+        // І ПІДСВІЧУЄМО ПРАВИЛЬНУ (щоб вона навчилася на помилці)
+        buttons.forEach(b => {
+            if (b.innerHTML === correctText) {
+                b.classList.remove('bg-white', 'border-slate-200');
+                b.classList.add('bg-green-100', 'border-green-500', 'text-green-700', 'border-2');
+            }
+        });
     }
+
+    // Затримка 1.5 сек перед наступним питанням
     setTimeout(() => {
         currentIndex++;
-        if (currentIndex < quizQuestions.length) showQuestion();
-        else finishQuiz();
+        if (currentIndex < quizQuestions.length) {
+            showQuestion();
+        } else {
+            finishQuiz();
+        }
     }, 1500);
 }
-
 function finishQuiz() {
     stopTimer();
     const pct = Math.round((score / quizQuestions.length) * 100);
