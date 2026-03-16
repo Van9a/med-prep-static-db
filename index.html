@@ -8,55 +8,74 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-    
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" 
-            onload="renderMathInElement(document.body, {delimiters: [{left: '$', right: '$', display: false}]});">
-    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 
     <style>
-        .krok-marker { @apply font-bold text-red-600 border-l-4 border-red-600 pl-2 my-2; }
-        .formula-box { @apply bg-slate-50 p-4 rounded-xl border border-slate-200 my-4 font-mono; }
-        .tab-active { @apply border-b-2 border-blue-600 text-blue-600; }
+        .krok-marker { border-left: 4px solid #ef4444; padding-left: 0.5rem; margin: 1rem 0; font-weight: bold; }
+        .tab-active { border-bottom: 2px solid #2563eb; color: #2563eb; }
+        .quiz-option:disabled { cursor: not-allowed; opacity: 0.8; }
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body class="bg-slate-50 min-h-screen text-slate-900 font-sans">
 
-    <header class="bg-blue-700 text-white p-4 shadow-lg sticky top-0 z-50">
+    <header class="bg-blue-700 text-white p-4 shadow-md sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold tracking-tight">KROK 1: Expert 2026</h1>
-            <div id="user-info" class="text-sm opacity-90 font-medium">Студент: Іван</div>
+            <h1 class="text-xl font-bold cursor-pointer" onclick="goHome()">KROK 1: Expert 2026</h1>
+            <div class="text-sm opacity-90">Студент: Іван</div>
         </div>
     </header>
 
     <main class="container mx-auto p-4 md:p-6">
-        <button onclick="window.location.reload()" class="mb-6 flex items-center text-blue-600 hover:text-blue-800 transition-colors font-medium">
-            <span class="mr-2">←</span> До тем
-        </button>
-
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-            <div class="flex border-b border-slate-200 bg-slate-50/50">
-                <button id="tab-study" class="flex-1 py-4 font-semibold text-slate-500 hover:text-slate-700 transition-all tab-active">
-                    Навчання (Конспект)
-                </button>
-                <button id="tab-quiz" class="flex-1 py-4 font-semibold text-slate-500 hover:text-slate-700 transition-all">
-                    Тестування (150 питань)
-                </button>
+        
+        <div id="screen-subjects" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             </div>
 
-            <div class="p-6 min-h-[400px]">
-                <div id="dynamic-content">
-                    <div class="flex items-center justify-center h-64 text-slate-400">
-                        Завантаження матеріалів...
+        <div id="screen-topics" class="hidden fade-in">
+            <button onclick="goHome()" class="text-blue-600 mb-4 font-medium">← Назад до предметів</button>
+            <h2 id="subject-title" class="text-2xl font-bold mb-6 text-slate-800"></h2>
+            <div id="topics-container" class="grid gap-3">
+                </div>
+        </div>
+
+        <div id="screen-study" class="hidden fade-in">
+            <button onclick="viewSubject(currentSubject.id)" class="text-blue-600 mb-4 font-medium">← До всіх тем</button>
+            
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="flex border-b bg-slate-50/50">
+                    <button id="tab-study" onclick="switchTab('study')" class="flex-1 py-4 font-semibold text-slate-500 tab-active">Навчання</button>
+                    <button id="tab-quiz" onclick="switchTab('quiz')" class="flex-1 py-4 font-semibold text-slate-500">Тестування</button>
+                </div>
+
+                <div class="p-6">
+                    <div id="content-study">
+                        <div id="study-material" class="prose max-w-none text-slate-700 leading-relaxed"></div>
+                    </div>
+
+                    <div id="content-quiz" class="hidden">
+                        <div id="quiz-intro" class="text-center py-12">
+                            <h3 class="text-xl font-bold mb-4">Готові до перевірки знань?</h3>
+                            <p class="text-slate-500 mb-6">Тест містить до 150 випадкових питань з обраної теми або всього предмета.</p>
+                            <button onclick="startQuiz()" class="bg-blue-600 text-white px-10 py-3 rounded-xl font-bold shadow-lg hover:bg-blue-700 transition-all">
+                                Почати тест
+                            </button>
+                        </div>
+
+                        <div id="quiz-game" class="hidden">
+                            <div class="flex justify-between mb-6 font-mono text-sm text-slate-500">
+                                <span id="quiz-progress">Питання: 1/150</span>
+                                <span id="quiz-timer">Час: 150:00</span>
+                            </div>
+                            <div id="question-text" class="text-xl font-semibold mb-8 text-slate-800 leading-relaxed"></div>
+                            <div id="options-container" class="space-y-3"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-
-    <footer class="mt-12 py-8 text-center text-slate-400 text-sm border-t border-slate-200">
-        <p>© 2026 Medical Prep Tool • Made for KROK 1 Success</p>
-    </footer>
 
     <script src="data.js"></script>
     <script src="app.js"></script>
