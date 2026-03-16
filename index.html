@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>KROK 1 Expert 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <header class="bg-blue-600 text-white p-6 shadow-lg">
+        <h1 class="text-3xl font-bold text-center">КРОК 1: Підготовка 2026</h1>
+    </header>
+
+    <main class="container mx-auto p-4">
+        <div id="subjects-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+
+        <div id="topics-section" class="hidden mt-8">
+            <button onclick="showSubjects()" class="text-blue-600 mb-4 underline">← Назад до предметів</button>
+            <h2 id="current-subject-title" class="text-2xl font-bold mb-4"></h2>
+            <div id="topics-list" class="space-y-2"></div>
+        </div>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
