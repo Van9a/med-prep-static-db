@@ -1,0 +1,66 @@
+/* Основні налаштування */
+:root {
+    --med-blue: #1e40af;
+    --med-light-blue: #eff6ff;
+    --correct-green: #10b981;
+    --wrong-red: #ef4444;
+}
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Анімація появи контенту */
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Картки предметів */
+.subject-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.subject-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+/* Стилізація варіантів відповідей у тесті */
+.quiz-option {
+    @apply p-4 border-2 border-slate-200 rounded-xl cursor-pointer transition-all mb-3 block w-full text-left;
+}
+
+.quiz-option:hover {
+    @apply border-blue-400 bg-blue-50;
+}
+
+.quiz-option.correct {
+    @apply border-emerald-500 bg-emerald-50 text-emerald-700;
+}
+
+.quiz-option.wrong {
+    @apply border-rose-500 bg-rose-50 text-rose-700;
+}
+
+/* Прогрес-бар */
+.progress-container {
+    height: 8px;
+    @apply bg-slate-200 rounded-full overflow-hidden w-full mb-4;
+}
+
+.progress-bar {
+    height: 100%;
+    @apply bg-blue-600 transition-all duration-500 ease-out;
+}
+
+/* Оформлення конспекту (Markdown-style) */
+#study-material h2 { @apply text-2xl font-bold text-slate-800 mt-6 mb-3; }
+#study-material h3 { @apply text-xl font-semibold text-slate-700 mt-4 mb-2; }
+#study-material p { @apply mb-4 text-slate-600 leading-relaxed; }
+#study-material ul { @apply list-disc pl-6 mb-4 space-y-2 text-slate-600; }
