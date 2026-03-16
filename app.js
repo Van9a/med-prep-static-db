@@ -87,25 +87,53 @@ function switchTab(tab) {
 
 // --- ЛОГІКА ТЕСТУВАННЯ ---
 
+/**
+ * Запуск процесу тестування
+ */
 function startQuiz() {
-    // Збираємо всі питання з поточної теми
-    // Якщо хочеш 150 з усього ПРЕДМЕТА, можна змінити логіку вибору
-    let allQuestions = [...currentTopic.questions];
+    let allQuestions = [];
     
+    // 1. Вибір режиму: Тема vs Весь предмет
+    // Це дозволяє дружині або тренувати конкретний блок, або симулювати реальний іспит
+    const isFullSubject = confirm("Бажаєте пройти тест по всьому предмету? \n(ОК - весь предмет, Скасувати - тільки обрана тема)");
+    
+    if (isFullSubject) {
+        // Збираємо питання з усіх тем поточного предмета
+        currentSubject.topics.forEach(topic => {
+            if (topic.questions && topic.questions.length > 0) {
+                allQuestions = allQuestions.concat(topic.questions);
+            }
+        });
+    } else {
+        // Беремо питання тільки з поточної теми
+        allQuestions = [...currentTopic.questions];
+    }
+
+    // 2. Перевірка на наявність питань у базі
     if (allQuestions.length === 0) {
-        alert("В цій темі поки немає питань. Додай їх у data.js!");
+        alert("У цій секції ще немає питань. Потрібно наповнити data.js!");
         return;
     }
 
-    // Рандомізація: перемішуємо і беремо максимум 150
+    // 3. Підготовка масиву питань (Shuffle & Limit)
+    // Перемішуємо базу і відсікаємо рівно 150 питань
     quizQuestions = shuffleArray(allQuestions).slice(0, 150);
+
+    // 4. Скидання стану (Reset state)
     currentIndex = 0;
     score = 0;
-    timeLeft = 150 * 60;
-
-    document.getElementById('quiz-intro').classList.add('hidden');
-    document.getElementById('quiz-game').classList.remove('hidden');
+    timeLeft = 150 * 60; // Стандарт КРОК: 150 хвилин
     
+    // На випадок, якщо таймер вже працював
+    if (timerInterval) clearInterval(timerInterval);
+
+    // 5. Оновлення інтерфейсу
+    document.getElementById('quiz-intro').classList.add('hidden');
+    const quizGame = document.getElementById('quiz-game');
+    quizGame.classList.remove('hidden');
+    quizGame.classList.add('fade-in');
+
+    // 6. Запуск ігрового циклу
     startTimer();
     showQuestion();
 }
