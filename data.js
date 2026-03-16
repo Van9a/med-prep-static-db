@@ -1,39 +1,60 @@
 const medDB = {
     subjects: [
+       {
+    id: "physio",
+    title: "Фізіологія",
+    en: "Physiology",
+    topics: [
         {
-            id: "physio",
-            title: "Фізіологія",
-            en: "Physiology",
-            topics: [
-                {
-                    id: "ps-1",
-                    title: "Збудливі тканини та Кров",
-                    content: `
-                        <div class="krok-marker">Маркери: КП (0.85-1.05), Na+ вхід (деполяризація), K+ вихід (ПС).</div>
-                        <p><strong>Формула КП:</strong> (3 * Hb) / (Er * 10). Гіпохромія < 0.85.</p>
-                    `,
-                    questions: [
-                        { q: "У пацієнта колірний показник 0,6. Яка це анемія?", options: ["Гіпохромна", "Гіперхромна", "Нормохромна", "Залізорефрактерна"], correct: 0, lang: "ua" },
-                        { q: "A patient's color index is 0.6. What type of anemia is it?", options: ["Hypochromic", "Hyperchromic", "Normochromic", "Hemolytic"], correct: 0, lang: "en" },
-                        { q: "Який іон відповідає за фазу деполяризації потенціалу дії?", options: ["Натрій", "Калій", "Кальцій", "Магній"], correct: 0, lang: "ua" },
-                        { q: "Which ion is responsible for the depolarization phase?", options: ["Sodium", "Potassium", "Calcium", "Magnesium"], correct: 0, lang: "en" },
-                        { q: "Гемоліз еритроцитів почався при 0,5% NaCl. Це свідчить про:", options: ["Зниження резистентності", "Норму", "Підвищення резистентності", "Гіпертонію"], correct: 0, lang: "ua" },
-                        { q: "Hemolysis of erythrocytes started at 0.5% NaCl. This indicates:", options: ["Decreased resistance", "Normal state", "Increased resistance", "Hypertension"], correct: 0, lang: "en" }
-                    ]
-                },
-                {
-                    id: "ps-2",
-                    title: "Серцево-судинна система та Дихання",
-                    content: `<div class="krok-marker">P - передсердя, QRS - шлуночки. Вагус - гальмує.</div>`,
-                    questions: [
-                        { q: "На ЕКГ відсутній зубець P. Де водій ритму?", options: ["АВ-вузол", "СА-вузол", "Пучок Гіса", "Передсердя"], correct: 0, lang: "ua" },
-                        { q: "P wave is absent on the ECG. Where is the pacemaker?", options: ["AV node", "SA node", "His bundle", "Atria"], correct: 0, lang: "en" },
-                        { q: "Чому альвеоли не спадаються при видиху?", options: ["Сурфактант", "Тиск", "Слизова", "Хрящ"], correct: 0, lang: "ua" },
-                        { q: "Why do alveoli not collapse during expiration?", options: ["Surfactant", "Pressure", "Mucosa", "Cartilage"], correct: 0, lang: "en" }
-                    ]
-                }
+            id: "ps-1",
+            title: "Загальна фізіологія (Збудливі тканини)",
+            content: `
+                <div class="krok-marker">Ключові концепції:</div>
+                <ul class="list-disc pl-5">
+                    <li><strong>Потенціал спокою (Resting potential):</strong> Вихід K+.</li>
+                    <li><strong>Деполяризація (Depolarization):</strong> Вхід Na+.</li>
+                    <li><strong>Реполяризація (Repolarization):</strong> Вихід K+.</li>
+                    <li><strong>Поріг подразнення (Threshold):</strong> Мінімальна сила для збудження.</li>
+                </ul>
+            `,
+            questions: [
+                { q: "Який іонний процес відповідає за фазу деполяризації потенціалу дії?", options: ["Вхід Na+", "Вихід K+", "Вхід Ca2+", "Вихід Na+"], correct: 0, lang: "ua" },
+                { q: "Which ionic process is responsible for the depolarization phase of the action potential?", options: ["Na+ influx", "K+ efflux", "Ca2+ influx", "Na+ efflux"], correct: 0, lang: "en" },
+                { q: "Як зміниться збудливість клітини при підвищенні порогу подразнення?", options: ["Зменшиться", "Збільшиться", "Не зміниться", "Зникне"], correct: 0, lang: "ua" },
+                { q: "How will the cell excitability change if the stimulation threshold is increased?", options: ["Decrease", "Increase", "Not change", "Disappear"], correct: 0, lang: "en" }
             ]
         },
+        {
+            id: "ps-2",
+            title: "Фізіологія крові",
+            content: `
+                <div class="krok-marker">Аналіз КРОК:</div>
+                <p><strong>Колірний показник (Color Index):</strong> Норма 0.85-1.05. < 0.85 — залізодефіцит.</p>
+                <p><strong>Групи крові:</strong> I(0) — немає аглютиногенів. IV(AB) — немає аглютинінів.</p>
+            `,
+            questions: [
+                { q: "У пацієнта КП = 0,7. Який тип анемії найбільш імовірний?", options: ["Залізодефіцитна", "B12-дефіцитна", "Гемолітична", "Апластична"], correct: 0, lang: "ua" },
+                { q: "A patient's color index is 0.7. Which type of anemia is most likely?", options: ["Iron-deficiency", "B12-deficiency", "Hemolytic", "Aplastic"], correct: 0, lang: "en" },
+                { q: "Який вітамін необхідний для нормального зсідання крові (синтез протромбіну)?", options: ["K", "C", "D", "B12"], correct: 0, lang: "ua" },
+                { q: "Which vitamin is essential for normal blood clotting (prothrombin synthesis)?", options: ["K", "C", "D", "B12"], correct: 0, lang: "en" }
+            ]
+        },
+        {
+            id: "ps-3",
+            title: "Серцево-судинна система",
+            content: `
+                <div class="krok-marker">ЕКГ та Регуляція:</div>
+                <ul class="list-disc pl-5">
+                    <li><strong>Зубець P:</strong> Збудження передсердь.</li>
+                    <li><strong>Комплекс QRS:</strong> Збудження шлуночків.</li>
+                    <li><strong>Vagus:</strong> Зменшує ЧСС (Брадикардія).</li>
+                    <li><strong>Симпатика:</strong> Збільшує ЧСС (Тахікардія).</li>
+                </ul>
+            `,
+            questions: [
+                { q: "На ЕКГ відсутній зубець P перед кожним комплексом QRS. Де водій ритму?", options: ["Атріовентрикулярний вузол", "Синоатріальний вузол", "Пучок Гіса", "Ніжки Гіса"], correct: 0, lang: "ua" },
+                { q: "P wave is absent on the ECG. Where is the pacemaker located?", options: ["Atrioventricular node", "Sinoatrial node", "Bundle of His", "Purkinje fibers"], correct: 0, lang: "en" },
+                { q: "Подразнення блукаючого нерва призвело,
         {
             id: "pharma",
             title: "Фармакологія",
