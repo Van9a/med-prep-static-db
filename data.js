@@ -13,7 +13,6 @@ const medDB = {
                             <h3 class="font-bold text-blue-800 mb-2">Основні функції та показники</h3>
                             <p>Кров складається з плазми (55-60%) та формених елементів (40-45%).</p>
                         </div>
-
                         <div class="mb-6">
                             <h4 class="font-bold text-slate-800">1. Еритроцити та Гемоглобін</h4>
                             <ul class="list-disc pl-5 space-y-2 text-slate-700">
@@ -22,7 +21,6 @@ const medDB = {
                                 <li><strong>ШОЕ (ESR):</strong> Чоловіки: 1-10 мм/год; Жінки: 2-15 мм/год.</li>
                             </ul>
                         </div>
-
                         <div class="formula-box bg-slate-100 p-4 my-4 rounded-lg border-2 border-slate-200">
                             <h4 class="font-bold text-blue-700 mb-2 underline">Важливі формули:</h4>
                             <div class="space-y-4">
@@ -33,21 +31,15 @@ const medDB = {
                                     </div>
                                     <p class="text-xs text-slate-500 mt-1">Норма: 0.85 – 1.05</p>
                                 </div>
-                                <div>
-                                    <p class="font-semibold text-sm">Гематокрит (Ht):</p>
-                                    <p class="text-slate-600 italic">Співвідношення об'єму формених елементів до об'єму плазми.</p>
-                                </div>
                             </div>
                         </div>
-
                         <div class="krok-marker">
                             <strong>КРОК-Маркери (2001-2026):</strong><br>
-                            - Осмотична резистентність еритроцитів знижена → <strong>Спадковий сфероцитоз (хвороба Мінковського-Шоффара)</strong>.<br>
-                            - Зсув лейкоцитарної формули вліво → <strong>Поява незрілих форм (паличкоядерні, мієлоцити) при запаленні</strong>.<br>
-                            - ШОЕ ↑ (прискорення) → <strong>Запалення, вагітність, пухлини (через ріст фібриногену та глобулінів)</strong>.
+                            - Осмотична резистентність еритроцитів знижена → <strong>Спадковий сфероцитоз (Мінковського-Шоффара)</strong>.<br>
+                            - Зсув лейкоцитарної формули вліво → <strong>Поява незрілих форм при запаленні</strong>.<br>
+                            - ШОЕ ↑ → <strong>Запалення, вагітність, пухлини</strong>.
                         </div>
                     `,
-                    
                     questions: [
                         {
                             q: "У жінки 25-ти років після крововтрати при пологах визначено групу крові: аглютинація відбулася з сироватками I(0) та II(A) груп, і не відбулася з III(B). Яка група крові у породіллі?",
@@ -62,78 +54,65 @@ const medDB = {
                             lang: "en"
                         }
                     ]
-                    // Додай ці об'єкти в topics предмета 'physio'
-{
-    id: "ps-2",
-    title: "Фізіологія серцево-судинної системи (ССС)",
-    content: `
-        <div class="krok-marker">Маркери КРОК (2001-2026):</div>
-        <ul class="list-disc pl-5 space-y-2">
-            <li><strong>Закон Франка-Старлінга:</strong> Чим більше розтягується міокард кров'ю, тим сильніше він скорочується.</li>
-            <li><strong>ЕКГ (Зубець P):</strong> Охоплення збудженням передсердь.</li>
-            <li><strong>ЕКГ (Комплекс QRS):</strong> Збудження шлуночків.</li>
-            <li><strong>ЕКГ (Зубець T):</strong> Реполяризація (відновлення) шлуночків.</li>
-            <li><strong>Вагус (Vagus):</strong> Уповільнює серце (негативний ефект). <strong>Симпатика:</strong> прискорює.</li>
-        </ul>
-        <div class="formula-box bg-slate-100 p-3 my-3 rounded">
-            <strong>Артеріальний тиск (АТ):</strong> <br>
-            Систолічний (норма 120) / Діастолічний (норма 80). <br>
-            Пульсовий тиск = Систолічний - Діастолічний.
-        </div>
-    `,
-    questions: []
-},
-{
-    id: "ps-3",
-    title: "Фізіологія дихання",
-    content: `
-        <div class="krok-marker">Маркери КРОК:</div>
-        <ul class="list-disc pl-5 space-y-2">
-            <li><strong>Сурфактант:</strong> Речовина, що не дає альвеолам злипатися. Дефіцит → спадання легень (ателектаз).</li>
-            <li><strong>Хеморецептори:</strong> Найбільш чутливі до надлишку <strong>CO2</strong> (вуглекислого газу).</li>
-            <li><strong>ЖЄЛ (Життєва ємність легень):</strong> Сума дихального об'єму, резерву вдиху та резерву видиху.</li>
-        </ul>
-        
-
-[Image of lung volumes and capacities diagram]
-
-    `,
-    questions: []
-},
-{
-    id: "ps-4",
-    title: "Фізіологія травлення",
-    content: `
-        <div class="krok-marker">Маркери КРОК:</div>
-        <ul class="list-disc pl-5 space-y-2">
-            <li><strong>Гастрин:</strong> Стимулює виділення шлункового соку.</li>
-            <li><strong>Ентерокіназа:</strong> Активує трипсиноген (перетворює на трипсин).</li>
-            <li><strong>Жовч:</strong> Не містить ферментів! Тільки емульгує жири.</li>
-            <li><strong>Центр голоду:</strong> Латеральні ядра гіпоталамуса.</li>
-        </ul>
-    `,
-    questions: []
-},
-{
-    id: "ps-5",
-    title: "Видільна система (Нирки)",
-    content: `
-        <div class="krok-marker">Маркери КРОК:</div>
-        <ul class="list-disc pl-5 space-y-2">
-            <li><strong>Глюкоза в сечі (Глюкозурія):</strong> З'являється, коли рівень глюкози в крові > 10 ммоль/л (поріг реобсорбції).</li>
-            <li><strong>Вазопресин (АДГ):</strong> Збільшує реобсорбцію води (сечі стає мало і вона концентрована).</li>
-            <li><strong>Альдостерон:</strong> Затримує Натрій ($Na^+$) та виводить Калій ($K^+$).</li>
-        </ul>
-        
-
-[Image of the nephron structure and function]
-
-    `,
-    questions: []
-}
                 },
-                { id: "ps-2", title: "Фізіологія серцево-судинної системи", content: "...", questions: [] },
-                { id: "ps-3", title: "Фізіологія дихання та газообміну", content: "...", questions: [] }
+                {
+                    id: "ps-2",
+                    title: "Фізіологія серцево-судинної системи (ССС)",
+                    content: `
+                        <div class="krok-marker">Маркери КРОК (2001-2026):</div>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Закон Франка-Старлінга:</strong> Чим більше розтягується міокард кров'ю, тим сильніше він скорочується.</li>
+                            <li><strong>ЕКГ (Зубець P):</strong> Охоплення збудженням передсердь.</li>
+                            <li><strong>ЕКГ (Комплекс QRS):</strong> Збудження шлуночків.</li>
+                            <li><strong>ЕКГ (Зубець T):</strong> Реполяризація шлуночків.</li>
+                            <li><strong>Вагус (Vagus):</strong> Уповільнює серце. <strong>Симпатика:</strong> прискорює.</li>
+                        </ul>
+                        <div class="formula-box bg-slate-100 p-3 my-3 rounded">
+                            <strong>АТ Систолічний (120) / Діастолічний (80).</strong> <br>
+                            Пульсовий тиск = Систолічний - Діастолічний.
+                        </div>
+                    `,
+                    questions: []
+                },
+                {
+                    id: "ps-3",
+                    title: "Фізіологія дихання",
+                    content: `
+                        <div class="krok-marker">Маркери КРОК:</div>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Сурфактант:</strong> Не дає альвеолам злипатися. Дефіцит → ателектаз.</li>
+                            <li><strong>Хеморецептори:</strong> Найчутливіші до надлишку <strong>CO2</strong>.</li>
+                            <li><strong>ЖЄЛ:</strong> Сума дихального об'єму, резерву вдиху та резерву видиху.</li>
+                        </ul>
+                    `,
+                    questions: []
+                },
+                {
+                    id: "ps-4",
+                    title: "Фізіологія травлення",
+                    content: `
+                        <div class="krok-marker">Маркери КРОК:</div>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Гастрин:</strong> Стимулює виділення шлункового соку.</li>
+                            <li><strong>Ентерокіназа:</strong> Активує трипсиноген.</li>
+                            <li><strong>Жовч:</strong> Емульгує жири, не має ферментів!</li>
+                        </ul>
+                    `,
+                    questions: []
+                },
+                {
+                    id: "ps-5",
+                    title: "Видільна система (Нирки)",
+                    content: `
+                        <div class="krok-marker">Маркери КРОК:</div>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Глюкозурія:</strong> Глюкоза в крові > 10 ммоль/л.</li>
+                            <li><strong>Вазопресин:</strong> Збільшує реобсорбцію води (мало сечі).</li>
+                            <li><strong>Альдостерон:</strong> Затримує Na+, виводить K+.</li>
+                        </ul>
+                    `,
+                    questions: []
+                }
             ]
         },
         { id: "pharma", title: "Фармакологія", en: "Pharmacology", topics: [] },
