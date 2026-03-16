@@ -7,121 +7,30 @@ const medDB = {
             topics: [
                 {
                     id: "ps-1",
-                    title: "Збудливі тканини. Нервово-м'язова фізіологія",
+                    title: "Збудливі тканини та Кров",
                     content: `
-                        <div class="krok-marker">Маркери КРОК (2001-2026):</div>
-                        <ul class="list-disc pl-5 space-y-2 text-slate-700">
-                            <li><strong>Натрій-Калієвий насос:</strong> Викачує 3 Na+ назовні, вкачує 2 K+ всередину. Створює від'ємний заряд.</li>
-                            <li><strong>Потенціал спокою:</strong> Залежить переважно від виходу іонів <strong>Калію (K+)</strong> з клітини.</li>
-                            <li><strong>Фаза деполяризації:</strong> Стрімкий вхід іонів <strong>Натрію (Na+)</strong> в клітину.</li>
-                            <li><strong>Поріг деполяризації:</strong> Мінімальна сила подразника для виникнення збудження.</li>
-                            <li><strong>Повний тетанус:</strong> Коли кожен наступний подразник припадає на фазу <strong>скорочення</strong> попереднього.</li>
-                        </ul>
-                        
-                    `,
-                    questions: []
-                },
-                {
-                    id: "ps-2",
-                    title: "Фізіологія системи крові",
-                    content: `
-                        <div class="mb-6">
-                            <h4 class="font-bold text-slate-800 underline">Норми та показники:</h4>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
-                                <li>Еритроцити: Ч: 4.0-5.1; Ж: 3.7-4.7 (*10^12/л).</li>
-                                <li>Гемоглобін: Ч: 130-160; Ж: 120-140 (г/л).</li>
-                                <li>Гематокрит: Ч: 0.40-0.48; Ж: 0.36-0.42.</li>
-                            </ul>
-                        </div>
-                        <div class="formula-box bg-slate-100 p-4 my-4 rounded-lg border-l-4 border-blue-500">
-                            <p class="font-semibold">Колірний показник (КП):</p>
-                            <div class="bg-white p-2 text-center font-mono text-lg rounded border my-2">
-                                КП = (3 * Hb (г/л)) / (перші три цифри еритроцитів)
-                            </div>
-                            <p class="text-xs">Норма: 0.85 – 1.05 (Нормохромія).</p>
-                        </div>
-                        <div class="krok-marker">
-                            <strong>Важливо:</strong><br>
-                            - Гемоліз еритроцитів у гіпотонічному розчині NaCl (0.3%) — норма. Якщо раніше — патологія.<br>
-                            - Вітамін B12 та фолієва кислота — необхідні для дозрівання еритроцитів (їх дефіцит → мегалобластна анемія).
-                        </div>
+                        <div class="krok-marker">Маркери: КП (0.85-1.05), Na+ вхід (деполяризація), K+ вихід (ПС).</div>
+                        <p><strong>Формула КП:</strong> (3 * Hb) / (Er * 10). Гіпохромія < 0.85.</p>
                     `,
                     questions: [
-                        {
-                            q: "An analysis of a patient's blood showed a decrease in the number of erythrocytes and a color index of 0.6. What type of anemia is this?",
-                            options: ["Hypochromic", "Hyperchromic", "Normochromic", "B12-deficiency"],
-                            correct: 0, lang: "en"
-                        }
+                        { q: "У пацієнта колірний показник 0,6. Яка це анемія?", options: ["Гіпохромна", "Гіперхромна", "Нормохромна", "Залізорефрактерна"], correct: 0, lang: "ua" },
+                        { q: "A patient's color index is 0.6. What type of anemia is it?", options: ["Hypochromic", "Hyperchromic", "Normochromic", "Hemolytic"], correct: 0, lang: "en" },
+                        { q: "Який іон відповідає за фазу деполяризації потенціалу дії?", options: ["Натрій", "Калій", "Кальцій", "Магній"], correct: 0, lang: "ua" },
+                        { q: "Which ion is responsible for the depolarization phase?", options: ["Sodium", "Potassium", "Calcium", "Magnesium"], correct: 0, lang: "en" },
+                        { q: "Гемоліз еритроцитів почався при 0,5% NaCl. Це свідчить про:", options: ["Зниження резистентності", "Норму", "Підвищення резистентності", "Гіпертонію"], correct: 0, lang: "ua" },
+                        { q: "Hemolysis of erythrocytes started at 0.5% NaCl. This indicates:", options: ["Decreased resistance", "Normal state", "Increased resistance", "Hypertension"], correct: 0, lang: "en" }
                     ]
                 },
                 {
-                    id: "ps-3",
-                    title: "Фізіологія серцево-судинної системи",
-                    content: `
-                        <div class="krok-marker">ЕКГ Аналіз:</div>
-                        <ul class="list-disc pl-5 space-y-2">
-                            <li><strong>P:</strong> Деполяризація передсердь.</li>
-                            <li><strong>QRS:</strong> Деполяризація шлуночків.</li>
-                            <li><strong>T:</strong> Реполяризація шлуночків.</li>
-                            <li><strong>P-Q інтервал:</strong> Час проведення збудження від передсердь до шлуночків (АВ-вузол).</li>
-                        </ul>
-                        
-
-[Image of ECG waves and their relationship to the cardiac cycle]
-
-                        <div class="bg-yellow-50 p-3 rounded mt-4">
-                            <strong>Регуляція:</strong> Симпатичні нерви (Норіпінефрин) → позитивні ефекти (ЧСС ↑). Парасимпатичні (Вагус, Ацетилхолін) → негативні ефекти (ЧСС ↓).
-                        </div>
-                    `,
-                    questions: []
-                },
-                {
-                    id: "ps-4",
-                    title: "Фізіологія дихання",
-                    content: `
-                        <div class="krok-marker">Спірометрія:</div>
-                        <ul class="list-disc pl-5">
-                            <li><strong>ЖЄЛ = TV + IRV + ERV.</strong></li>
-                            <li><strong>Залишковий об'єм:</strong> Повітря, що залишається після максимального видиху.</li>
-                        </ul>
-                        <p class="mt-4 italic">Перенесення газів: CO2 транспортується переважно у вигляді <strong>бікарбонатів (HCO3-)</strong>.</p>
-                    `,
-                    questions: []
-                },
-                {
-                    id: "ps-5",
-                    title: "Ендокринна система (Гормони)",
-                    content: `
-                        <div class="krok-marker">Маркери КРОК:</div>
-                        <ul class="list-disc pl-5 space-y-2">
-                            <li><strong>Інсулін:</strong> Єдиний гормон, що ЗНИЖУЄ рівень цукру.</li>
-                            <li><strong>Адреналін та Глюкагон:</strong> ПІДВИЩУЮТЬ рівень цукру.</li>
-                            <li><strong>Альдостерон:</strong> Затримує Na+, виводить K+ (регуляція тиску).</li>
-                            <li><strong>Вазопресин (АДГ):</strong> Реабсорбція води в нирках. Дефіцит → Нецукровий діабет (багато сечі).</li>
-                            <li><strong>Тироксин (Т4):</strong> Основний обмін. Надлишок → Базедова хвороба (тахікардія, екзофтальм).</li>
-                        </ul>
-                        
-
-[Image of the endocrine system feedback loops]
-
-                    `,
-                    questions: []
-                },
-                {
-                    id: "ps-6",
-                    title: "Вища нервова діяльність (ВНД)",
-                    content: `
-                        <div class="krok-marker">Типи за Павловим:</div>
-                        <ul class="list-disc pl-5 space-y-2">
-                            <li><strong>Сангвінік:</strong> Сильний, врівноважений, рухливий.</li>
-                            <li><strong>Флегматик:</strong> Сильний, врівноважений, інертний.</li>
-                            <li><strong>Холерик:</strong> Сильний, НЕврівноважений (переважає збудження).</li>
-                            <li><strong>Меланхолік:</strong> Слабкий тип.</li>
-                        </ul>
-                        <p class="mt-4"><strong>Перша сигнальна система:</strong> Реакція на фізичні подразники (світло, звук).<br>
-                        <strong>Друга сигнальна система:</strong> Реакція на слово (мова, мислення) — тільки у людини.</p>
-                    `,
-                    questions: []
+                    id: "ps-2",
+                    title: "Серцево-судинна система та Дихання",
+                    content: `<div class="krok-marker">P - передсердя, QRS - шлуночки. Вагус - гальмує.</div>`,
+                    questions: [
+                        { q: "На ЕКГ відсутній зубець P. Де водій ритму?", options: ["АВ-вузол", "СА-вузол", "Пучок Гіса", "Передсердя"], correct: 0, lang: "ua" },
+                        { q: "P wave is absent on the ECG. Where is the pacemaker?", options: ["AV node", "SA node", "His bundle", "Atria"], correct: 0, lang: "en" },
+                        { q: "Чому альвеоли не спадаються при видиху?", options: ["Сурфактант", "Тиск", "Слизова", "Хрящ"], correct: 0, lang: "ua" },
+                        { q: "Why do alveoli not collapse during expiration?", options: ["Surfactant", "Pressure", "Mucosa", "Cartilage"], correct: 0, lang: "en" }
+                    ]
                 }
             ]
         },
@@ -130,13 +39,84 @@ const medDB = {
             title: "Фармакологія",
             en: "Pharmacology",
             topics: [
-                { id: "ph-1", title: "Вегетативна НС", content: "Конспект завантажується...", questions: [] },
-                { id: "ph-2", title: "Антибіотики", content: "...", questions: [] }
+                {
+                    id: "ph-1",
+                    title: "Вегетативна НС та Антибіотики",
+                    content: `<div class="krok-marker">Атропін - сухість, мідріаз. Тетрациклін - зуби. Гентаміцин - слух.</div>`,
+                    questions: [
+                        { q: "Препарат для лікування глаукоми, що звужує зіницю:", options: ["Пілокарпін", "Атропін", "Адреналін", "Мезатон"], correct: 0, lang: "ua" },
+                        { q: "A drug for glaucoma treatment that constricts the pupil:", options: ["Pilocarpine", "Atropine", "Epinephrine", "Phenylephrine"], correct: 0, lang: "en" },
+                        { q: "Антибіотик, що викликає 'жовті зуби' у дітей:", options: ["Тетрациклін", "Пеніцилін", "Ністатин", "Азитроміцин"], correct: 0, lang: "ua" },
+                        { q: "An antibiotic that causes 'yellow teeth' in children:", options: ["Tetracycline", "Penicillin", "Nystatin", "Azithromycin"], correct: 0, lang: "en" },
+                        { q: "Антидот при отруєнні морфіном:", options: ["Налоксон", "Атропін", "Унітіол", "Бемегрид"], correct: 0, lang: "ua" },
+                        { q: "Antidote for morphine poisoning:", options: ["Naloxone", "Atropine", "Unithiol", "Bemegride"], correct: 0, lang: "en" }
+                    ]
+                }
             ]
         },
-        { id: "pathmorph", title: "Патоморфологія", en: "Pathomorphology", topics: [] },
-        { id: "pathphys", title: "Патофізіологія", en: "Pathophysiology", topics: [] },
-        { id: "anatomy", title: "Анатомія", en: "Anatomy", topics: [] },
-        { id: "histo", title: "Гістологія", en: "Histology", topics: [] }
+        {
+            id: "pathmorph",
+            title: "Патоморфологія",
+            en: "Pathomorphology",
+            topics: [
+                {
+                    id: "pm-1",
+                    title: "Загальна патологія",
+                    content: `<div class="krok-marker">Мускатна печінка - хронічне венозне повнокрів'я.</div>`,
+                    questions: [
+                        { q: "Печінка щільна, на розрізі вигляд мускатного горіха. Це:", options: ["Хронічне венозне повнокрів'я", "Амілоїдоз", "Жирова дистрофія", "Цироз"], correct: 0, lang: "ua" },
+                        { q: "Liver is dense, looks like a nutmeg on the section. This is:", options: ["Chronic venous congestion", "Amyloidosis", "Fatty dystrophy", "Cirrhosis"], correct: 0, lang: "en" }
+                    ]
+                }
+            ]
+        },
+        {
+            id: "pathphys",
+            title: "Патофізіологія",
+            en: "Pathophysiology",
+            topics: [
+                {
+                    id: "pp-1",
+                    title: "Запалення та Гарячка",
+                    content: `<div class="krok-marker">Стадія 1 - підйом t, Стадія 2 - плато, Стадія 3 - падіння.</div>`,
+                    questions: [
+                        { q: "При якій стадії гарячки теплопродукція дорівнює тепловіддачі?", options: ["Стадія стояння температури", "Стадія підйому", "Стадія зниження", "Кризис"], correct: 0, lang: "ua" },
+                        { q: "At which stage of fever does heat production equal heat loss?", options: ["Fastigium (plateau)", "Incrementi", "Decrementi", "Crisis"], correct: 0, lang: "en" }
+                    ]
+                }
+            ]
+        },
+        {
+            id: "anatomy",
+            title: "Анатомія",
+            en: "Anatomy",
+            topics: [
+                {
+                    id: "an-1",
+                    title: "Остеологія та Неврологія",
+                    content: `<div class="krok-marker">N. facialis - міміка. N. trigeminus - чутливість обличчя.</div>`,
+                    questions: [
+                        { q: "Хворий не може закрити око на одній стороні, кут рота опущений. Який нерв уражено?", options: ["Лицевий", "Трійчастий", "Блукаючий", "Під'язиковий"], correct: 0, lang: "ua" },
+                        { q: "A patient cannot close one eye, the corner of the mouth is drooping. Which nerve is damaged?", options: ["Facial", "Trigeminal", "Vagus", "Hypoglossal"], correct: 0, lang: "en" }
+                    ]
+                }
+            ]
+        },
+        {
+            id: "histo",
+            title: "Гістологія",
+            en: "Histology",
+            topics: [
+                {
+                    id: "hs-1",
+                    title: "Тканини та Клітини",
+                    content: `<div class="krok-marker">Епітелій: багатошаровий плоский зроговілий - шкіра.</div>`,
+                    questions: [
+                        { q: "Яка тканина вистилає слизову оболонку стравоходу?", options: ["Багатошаровий плоский незроговілий", "Одношаровий призматичний", "Перехідний", "Війчастий"], correct: 0, lang: "ua" },
+                        { q: "What tissue lines the esophageal mucosa?", options: ["Non-keratinized stratified squamous", "Simple columnar", "Transitional", "Ciliated"], correct: 0, lang: "en" }
+                    ]
+                }
+            ]
+        }
     ]
 };
