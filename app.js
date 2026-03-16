@@ -56,13 +56,11 @@ function viewTopic(topicId) {
     screen.classList.remove('hidden');
     screen.classList.add('fade-in');
     
-    // Завантажуємо контент (можна додати підтримку Markdown або HTML)
-    document.getElementById('study-material').innerHTML = `
-        <h2 class="text-2xl font-bold text-blue-800 mb-4">${currentTopic.title}</h2>
-        <div class="content-body text-slate-700 leading-relaxed">
-            ${currentTopic.content}
-        </div>
-    `;
+    document.getElementById('study-material').innerHTML = currentTopic.content;
+    
+    // Якщо додав KaTeX, активуй цей рядок:
+     renderMathInElement(document.getElementById('study-material'));
+    
     switchTab('study');
 }
 
