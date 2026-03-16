@@ -79,16 +79,16 @@ function showQuestion() {
     const qText = document.getElementById('question-text');
     document.getElementById('quiz-progress').innerText = `Питання: ${currentIndex + 1}/${quizQuestions.length}`;
     
-    // Ключове виправлення: innerHTML + renderMath
     qText.innerHTML = q.q;
     
     const container = document.getElementById('options-container');
-    container.innerHTML = '';
+    container.innerHTML = ''; // Очищуємо контейнер
     
     shuffleArray(q.options.map((text, index) => ({ text, index }))).forEach(opt => {
         const btn = document.createElement('button');
-        btn.className = 'quiz-option';
-        btn.innerHTML = opt.text; // innerHTML для кнопок
+        // Прямі класи Tailwind: ширина на весь екран, відступи, рамка, колір фону
+        btn.className = 'w-full text-left p-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 transition-all font-medium block shadow-sm';
+        btn.innerHTML = opt.text;
         btn.onclick = () => handleAnswer(opt.index, q.correct, btn);
         container.appendChild(btn);
     });
