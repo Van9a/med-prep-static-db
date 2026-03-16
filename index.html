@@ -2,22 +2,58 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>KROK 1 Expert 2026</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Med Prep Static DB - KROK 1</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .hidden { display: none; }
+        .active-tab { border-bottom: 2px solid #2563eb; color: #2563eb; }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
-    <header class="bg-blue-600 text-white p-6 shadow-lg">
-        <h1 class="text-3xl font-bold text-center">КРОК 1: Підготовка 2026</h1>
-    </header>
+<body class="bg-slate-50 min-h-screen">
+    <nav class="bg-blue-700 text-white p-4 shadow-md sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="font-bold text-xl cursor-pointer" onclick="goHome()">KROK 1: Expert 2026</h1>
+            <div id="nav-info" class="text-sm opacity-80"></div>
+        </div>
+    </nav>
 
-    <main class="container mx-auto p-4">
-        <div id="subjects-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <main class="container mx-auto p-4 md:p-8">
+        <div id="screen-subjects" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+        <div id="screen-topics" class="hidden">
+            <button onclick="goHome()" class="mb-4 text-blue-600 font-semibold">← До предметів</button>
+            <h2 id="subject-title" class="text-3xl font-bold mb-6 text-slate-800"></h2>
+            <div id="topics-container" class="space-y-3"></div>
+        </div>
+
+        <div id="screen-study" class="hidden">
+            <button onclick="backToTopics()" class="mb-4 text-blue-600 font-semibold">← До тем</button>
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="flex border-b">
+                    <button id="tab-study" onclick="switchTab('study')" class="flex-1 p-4 font-bold active-tab">Навчання (Конспект)</button>
+                    <button id="tab-quiz" onclick="switchTab('quiz')" class="flex-1 p-4 font-bold">Тестування (150 питань)</button>
+                </div>
+                
+                <div id="content-study" class="p-6">
+                    <div id="study-material" class="prose max-w-none"></div>
+                </div>
+
+                <div id="content-quiz" class="p-6 hidden">
+                    <div id="quiz-intro">
+                        <p class="mb-4">Готові почати тест на 150 питань? (Mix UA/EN)</p>
+                        <button onclick="startQuiz()" class="bg-green-600 text-white px-6 py-2 rounded-lg font-bold">Почати тест</button>
+                    </div>
+                    <div id="quiz-game" class="hidden">
+                        <div class="flex justify-between mb-4 font-mono text-sm">
+                            <span id="quiz-progress">Питання: 1/150</span>
+                            <span id="quiz-timer">Час: 150:00</span>
+                        </div>
+                        <div id="question-text" class="text-lg font-medium mb-6"></div>
+                        <div id="options-container" class="grid gap-3"></div>
+                    </div>
+                </div>
             </div>
-
-        <div id="topics-section" class="hidden mt-8">
-            <button onclick="showSubjects()" class="text-blue-600 mb-4 underline">← Назад до предметів</button>
-            <h2 id="current-subject-title" class="text-2xl font-bold mb-4"></h2>
-            <div id="topics-list" class="space-y-2"></div>
         </div>
     </main>
 
