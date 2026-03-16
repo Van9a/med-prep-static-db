@@ -5,9 +5,17 @@ let quizQuestions = [];
 let currentIndex = 0;
 let score = 0;
 let timerInterval = null;
-let timeLeft = 150 * 60; // 150 хвилин у секундах
+let timeLeft = 150 * 60; 
 
-// Ініціалізація при завантаженні
+// Конфігурація для KaTeX (щоб розумів знаки $)
+const katexOptions = {
+    delimiters: [
+        {left: "$", right: "$", display: false}
+    ],
+    throwOnError: false
+};
+
+// Ініціалізація
 document.addEventListener('DOMContentLoaded', () => {
     renderSubjects();
 });
@@ -18,14 +26,13 @@ function goHome() {
     stopTimer();
     hideAll();
     document.getElementById('screen-subjects').classList.remove('hidden');
-    document.getElementById('screen-subjects').classList.add('fade-in');
     renderSubjects();
 }
 
 function renderSubjects() {
     const container = document.getElementById('screen-subjects');
     container.innerHTML = medDB.subjects.map(s => `
-        <div onclick="viewSubject('${s.id}')" class="subject-card bg-white p-6 rounded-2xl shadow-sm border border-slate-200 cursor-pointer">
+        <div onclick="viewSubject('${s.id}')" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 cursor-pointer hover:shadow-md transition-shadow">
             <h3 class="text-xl font-bold text-slate-800">${s.title}</h3>
             <p class="text-slate-400 text-sm uppercase tracking-wider">${s.en}</p>
         </div>
@@ -35,9 +42,7 @@ function renderSubjects() {
 function viewSubject(id) {
     currentSubject = medDB.subjects.find(s => s.id === id);
     hideAll();
-    const screen = document.getElementById('screen-topics');
-    screen.classList.remove('hidden');
-    screen.classList.add('fade-in');
+    document.getElementById('screen-topics').classList.remove('hidden');
     document.getElementById('subject-title').innerText = currentSubject.title;
     
     const container = document.getElementById('topics-container');
@@ -52,14 +57,15 @@ function viewSubject(id) {
 function viewTopic(topicId) {
     currentTopic = currentSubject.topics.find(t => t.id === topicId);
     hideAll();
-    const screen = document.getElementById('screen-study');
-    screen.classList.remove('hidden');
-    screen.classList.add('fade-in');
+    document.getElementById('screen-study').classList.remove('hidden');
     
-    document.getElementById('study-material').innerHTML = currentTopic.content;
+    const studyContainer = document.getElementById('study-material');
+    studyContainer.innerHTML = currentTopic.content;
     
-    // Якщо додав KaTeX, активуй цей рядок:
-     renderMathInElement(document.getElementById('study-material'));
+    // Рендеримо математику в конспекті
+    if (window.renderMathInElement) {
+        renderMathInElement(studyContainer, katexOptions);
+    }
     
     switchTab('study');
 }
@@ -72,13 +78,13 @@ function switchTab(tab) {
 
     if(tab === 'study') {
         stopTimer();
-        sTab.classList.add('active-tab'); 
-        qTab.classList.remove('active-tab');
+        sTab.classList.add('tab-active'); 
+        qTab.classList.remove('tab-active');
         sContent.classList.remove('hidden'); 
         qContent.classList.add('hidden');
     } else {
-        sTab.classList.remove('active-tab'); 
-        qTab.classList.add('active-tab');
+        sTab.classList.remove('tab-active'); 
+        qTab.classList.add('tab-active');
         sContent.classList.add('hidden'); 
         qContent.classList.remove('hidden');
         resetQuizUI();
@@ -87,98 +93,79 @@ function switchTab(tab) {
 
 // --- ЛОГІКА ТЕСТУВАННЯ ---
 
-/**
- * Запуск процесу тестування
- */
 function startQuiz() {
     let allQuestions = [];
-    
-    // 1. Вибір режиму: Тема vs Весь предмет
-    // Це дозволяє дружині або тренувати конкретний блок, або симулювати реальний іспит
-    const isFullSubject = confirm("Бажаєте пройти тест по всьому предмету? \n(ОК - весь предмет, Скасувати - тільки обрана тема)");
+    const isFullSubject = confirm("Бажаєте пройти тест по всьому предмету?");
     
     if (isFullSubject) {
-        // Збираємо питання з усіх тем поточного предмета
         currentSubject.topics.forEach(topic => {
-            if (topic.questions && topic.questions.length > 0) {
-                allQuestions = allQuestions.concat(topic.questions);
-            }
+            if (topic.questions) allQuestions = allQuestions.concat(topic.questions);
         });
     } else {
-        // Беремо питання тільки з поточної теми
         allQuestions = [...currentTopic.questions];
     }
 
-    // 2. Перевірка на наявність питань у базі
     if (allQuestions.length === 0) {
-        alert("У цій секції ще немає питань. Потрібно наповнити data.js!");
+        alert("Питань поки немає!");
         return;
     }
 
-    // 3. Підготовка масиву питань (Shuffle & Limit)
-    // Перемішуємо базу і відсікаємо рівно 150 питань
     quizQuestions = shuffleArray(allQuestions).slice(0, 150);
-
-    // 4. Скидання стану (Reset state)
     currentIndex = 0;
     score = 0;
-    timeLeft = 150 * 60; // Стандарт КРОК: 150 хвилин
+    timeLeft = 150 * 60;
     
-    // На випадок, якщо таймер вже працював
-    if (timerInterval) clearInterval(timerInterval);
-
-    // 5. Оновлення інтерфейсу
     document.getElementById('quiz-intro').classList.add('hidden');
-    const quizGame = document.getElementById('quiz-game');
-    quizGame.classList.remove('hidden');
-    quizGame.classList.add('fade-in');
+    document.getElementById('quiz-game').classList.remove('hidden');
 
-    // 6. Запуск ігрового циклу
     startTimer();
     showQuestion();
 }
 
 function showQuestion() {
     const q = quizQuestions[currentIndex];
+    const qTextElement = document.getElementById('question-text');
+    
     document.getElementById('quiz-progress').innerText = `Питання: ${currentIndex + 1}/${quizQuestions.length}`;
-    document.getElementById('question-text').innerText = q.q;
-
-    // Перемішуємо варіанти відповідей, щоб не запам'ятовувала порядок
-    const options = q.options.map((text, index) => ({ text, index }));
-    const shuffledOptions = shuffleArray(options);
+    
+    // Використовуємо innerHTML для підтримки KaTeX
+    qTextElement.innerHTML = q.q;
 
     const container = document.getElementById('options-container');
     container.innerHTML = '';
     
+    const shuffledOptions = shuffleArray(q.options.map((text, index) => ({ text, index })));
+
     shuffledOptions.forEach(opt => {
         const btn = document.createElement('button');
-        btn.className = 'quiz-option fade-in';
-        btn.innerText = opt.text;
+        btn.className = 'w-full text-left p-4 rounded-xl border border-slate-200 hover:bg-slate-50 transition-all font-medium mb-2 quiz-option';
+        btn.innerHTML = opt.text; // innerHTML для формул у кнопках
         btn.onclick = () => handleAnswer(opt.index, q.correct, btn);
         container.appendChild(btn);
     });
+
+    // Оновлюємо рендер формул для всього блоку тесту
+    if (window.renderMathInElement) {
+        renderMathInElement(document.getElementById('quiz-game'), katexOptions);
+    }
 }
 
 function handleAnswer(selectedIndex, correctIndex, btnElement) {
-    // Блокуємо інші кнопки
     const buttons = document.querySelectorAll('.quiz-option');
     buttons.forEach(b => b.disabled = true);
 
     if (selectedIndex === correctIndex) {
-        btnElement.classList.add('correct');
+        btnElement.classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-700');
         score++;
     } else {
-        btnElement.classList.add('wrong');
-        // Показуємо правильну відповідь
+        btnElement.classList.add('bg-rose-100', 'border-rose-500', 'text-rose-700');
         buttons.forEach(b => {
-            // Знаходимо кнопку з правильним індексом тексту
-            if (quizQuestions[currentIndex].options[correctIndex] === b.innerText) {
-                b.classList.add('correct');
+            if (quizQuestions[currentIndex].options[correctIndex] === b.innerHTML) {
+                b.classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-700');
             }
         });
     }
 
-    // Затримка перед наступним питанням для аналізу помилки
     setTimeout(() => {
         currentIndex++;
         if (currentIndex < quizQuestions.length) {
@@ -186,27 +173,29 @@ function handleAnswer(selectedIndex, correctIndex, btnElement) {
         } else {
             finishQuiz();
         }
-    }, 1200);
+    }, 1500);
 }
 
 function finishQuiz() {
     stopTimer();
     const percent = Math.round((score / quizQuestions.length) * 100);
-    const passed = percent >= 80; // Поріг КРОК зазвичай 60-80% залежно від року
+    const passed = percent >= 80;
 
     document.getElementById('quiz-game').innerHTML = `
-        <div class="text-center py-8 fade-in">
+        <div class="text-center py-10">
             <h3 class="text-3xl font-bold ${passed ? 'text-emerald-600' : 'text-rose-600'} mb-4">
-                ${passed ? 'Тест пройдено!' : 'Потрібно ще підучити'}
+                ${passed ? 'Passed!' : 'Try Again'}
             </h3>
-            <p class="text-5xl font-black mb-4">${percent}%</p>
-            <p class="text-slate-600 mb-6">Правильних відповідей: ${score} з ${quizQuestions.length}</p>
-            <button onclick="resetQuizUI()" class="bg-blue-600 text-white px-8 py-3 rounded-xl font-bold shadow-lg">Спробувати ще раз</button>
+            <p class="text-6xl font-black mb-4">${percent}%</p>
+            <p class="text-slate-600 mb-8">Correct: ${score} / ${quizQuestions.length}</p>
+            <button onclick="resetQuizUI()" class="bg-blue-600 text-white px-10 py-4 rounded-2xl font-bold shadow-lg hover:bg-blue-700 transition-colors">
+                Back to Menu
+            </button>
         </div>
     `;
 }
 
-// --- ДОПОМІЖНІ ФУНКЦІЇ ---
+// --- UTILS ---
 
 function startTimer() {
     timerInterval = setInterval(() => {
@@ -214,28 +203,22 @@ function startTimer() {
         const mins = Math.floor(timeLeft / 60);
         const secs = timeLeft % 60;
         document.getElementById('quiz-timer').innerText = `Час: ${mins}:${secs < 10 ? '0' : ''}${secs}`;
-        
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            finishQuiz();
-        }
+        if (timeLeft <= 0) finishQuiz();
     }, 1000);
 }
 
-function stopTimer() {
-    clearInterval(timerInterval);
-}
+function stopTimer() { clearInterval(timerInterval); }
 
 function resetQuizUI() {
     document.getElementById('quiz-intro').classList.remove('hidden');
     document.getElementById('quiz-game').classList.add('hidden');
     document.getElementById('quiz-game').innerHTML = `
-        <div class="flex justify-between mb-4 font-mono text-sm">
+        <div class="flex justify-between mb-6 font-mono text-sm text-slate-500">
             <span id="quiz-progress">Питання: 1/150</span>
             <span id="quiz-timer">Час: 150:00</span>
         </div>
-        <div id="question-text" class="text-lg font-medium mb-6 italic text-slate-800"></div>
-        <div id="options-container" class="grid gap-3"></div>
+        <div id="question-text" class="text-xl font-semibold mb-8 text-slate-800 leading-relaxed"></div>
+        <div id="options-container" class="space-y-3"></div>
     `;
 }
 
@@ -247,8 +230,4 @@ function hideAll() {
 
 function shuffleArray(array) {
     return array.sort(() => Math.random() - 0.5);
-}
-
-function backToTopics() {
-    viewSubject(currentSubject.id);
 }
