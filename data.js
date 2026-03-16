@@ -1,99 +1,97 @@
 const medDB = {
     subjects: [
         {
-            id: "physio",
-            title: "Фізіологія",
-            en: "Physiology",
-            topics: [
-                {
-                    id: "ps-1",
-                    title: "Загальна фізіологія (Збудливі тканини)",
-                    content: `
-                        <div class="krok-marker">Ключові концепції:</div>
-                        <ul class="list-disc pl-5">
-                            <li><strong>Потенціал спокою:</strong> Вихід K+ з клітини.</li>
-                            <li><strong>Деполяризація:</strong> Вхід Na+ в клітину.</li>
-                            <li><strong>Реполяризація:</strong> Вихід K+ (відновлення заряду).</li>
-                            <li><strong>Поріг подразнення:</strong> Мінімальна сила для збудження.</li>
-                        </ul>
-                    `,
-                    questions: [
-                        { q: "Який іонний процес відповідає за фазу деполяризації потенціалу дії?", options: ["Вхід Na+", "Вихід K+", "Вхід Ca2+", "Вихід Na+"], correct: 0, lang: "ua" },
-                        { q: "Which ionic process is responsible for the depolarization phase?", options: ["Na+ influx", "K+ efflux", "Ca2+ influx", "Na+ efflux"], correct: 0, lang: "en" },
-                        { q: "Як зміниться збудливість клітини при підвищенні порогу подразнення?", options: ["Зменшиться", "Збільшиться", "Не зміниться", "Зникне"], correct: 0, lang: "ua" },
-                        { q: "How will the cell excitability change if the stimulation threshold is increased?", options: ["Decrease", "Increase", "Not change", "Disappear"], correct: 0, lang: "en" }
-                    ]
-                },
-                {
-                    id: "ps-2",
-                    title: "Фізіологія крові",
-                    content: `
-                        <div class="krok-marker">Аналіз КРОК:</div>
-                        <p><strong>Колірний показник:</strong> Норма 0.85-1.05. Нижче 0.85 — залізодефіцит (гіпохромія).</p>
-                        <p><strong>Група I(0):</strong> Немає аглютиногенів A та B.</p>
-                    `,
-                    questions: [
-                        { q: "У пацієнта КП = 0,7. Який тип анемії найбільш імовірний?", options: ["Залізодефіцитна", "B12-дефіцитна", "Гемолітична", "Апластична"], correct: 0, lang: "ua" },
-                        { q: "A patient's color index is 0.7. Which type of anemia is most likely?", options: ["Iron-deficiency", "B12-deficiency", "Hemolytic", "Aplastic"], correct: 0, lang: "en" },
-                        { q: "Який вітамін необхідний для синтезу факторів зсідання крові у печінці?", options: ["Вітамін K", "Вітамін C", "Вітамін D", "Вітамін B12"], correct: 0, lang: "ua" },
-                        { q: "Which vitamin is essential for prothrombin synthesis in the liver?", options: ["Vitamin K", "Vitamin C", "Vitamin D", "Vitamin B12"], correct: 0, lang: "en" }
-                    ]
-                },
-                {
-                    id: "ps-3",
-                    title: "Серцево-судинна система",
-                    content: `
-                        <div class="krok-marker">ЕКГ Ключі:</div>
-                        <p>P — передсердя. QRS — шлуночки. T — реполяризація шлуночків.</p>
-                        <p>Vagus (ACh) — уповільнює серце. Sympathicus (NE) — прискорює.</p>
-                    `,
-                    questions: [
-                        { q: "На ЕКГ відсутній зубець P перед кожним QRS. Де водій ритму?", options: ["Атріовентрикулярний вузол", "Синоатріальний вузол", "Пучок Гіса", "Волокна Пуркін'є"], correct: 0, lang: "ua" },
-                        { q: "P wave is absent on the ECG. Where is the pacemaker located?", options: ["Atrioventricular node", "Sinoatrial node", "Bundle of His", "Purkinje fibers"], correct: 0, lang: "en" },
-                        { q: "Подразнення блукаючого нерва викликало зупинку серця. Який медіатор це спричинив?", options: ["Ацетилхолін", "Адреналін", "Норадреналін", "ГАМК"], correct: 0, lang: "ua" },
-                        { q: "Vagus nerve stimulation caused cardiac arrest. Which mediator is responsible?", options: ["Acetylcholine", "Epinephrine", "Norepinephrine", "GABA"], correct: 0, lang: "en" }
-                    ]
-                },
-                {
-                    id: "ps-4",
-                    title: "Травлення, Виділення та Обмін",
-                    content: `
-                        <div class="krok-marker">Важливі маркери:</div>
-                        <p><strong>Ентерокіназа:</strong> Активує трипсиноген. <strong>Жовч:</strong> Емульгує жири.</p>
-                        <p><strong>Нирки:</strong> Глюкозурія при нормі крові = порушення реабсорбції.</p>
-                        <p><strong>Терморегуляція:</strong> Випаровування — основний шлях при t > 35°C.</p>
-                    `,
-                    questions: [
-                        { q: "У хворого порушено перетравлення білків через дефіцит ентерокінази. Який фермент не активується?", options: ["Трипсиноген", "Пепсиноген", "Амілаза", "Ліпаза"], correct: 0, lang: "ua" },
-                        { q: "Protein digestion is impaired due to enterokinase deficiency. What fails to activate?", options: ["Trypsinogen", "Pepsinogen", "Amylase", "Lipase"], correct: 0, lang: "en" },
-                        { q: "Який гормон ШКТ стимулює секрецію соляної кислоти?", options: ["Гастрин", "Секретин", "Холецистокінін", "Соматостатин"], correct: 0, lang: "ua" },
-                        { q: "Which GI hormone stimulates hydrochloric acid secretion?", options: ["Gastrin", "Secretin", "Cholecystokinin", "Somatostatin"], correct: 0, lang: "en" },
-                        { q: "У сечі виявлено глюкозу при її нормі в плазмі крові. Де відбулося порушення?", options: ["Реабсорбція", "Фільтрація", "Секреція", "Екскреція"], correct: 0, lang: "ua" },
-                        { q: "Glucose was found in urine despite normal plasma levels. Identify the process:", options: ["Reabsorption", "Filtration", "Secretion", "Excretion"], correct: 0, lang: "en" },
-                        { q: "В умовах високої температури (38°C) найефективніший шлях тепловіддачі:", options: ["Випаровування поту", "Конвекція", "Радіація", "Теплопроведення"], correct: 0, lang: "ua" },
-                        { q: "In conditions of high temperature (38°C), the most effective heat loss is:", options: ["Evaporation of sweat", "Convection", "Radiation", "Conduction"], correct: 0, lang: "en" },
-                        { q: "Який іон необхідний для скорочення м'язів (зв'язування актину з міозином)?", options: ["Ca2+", "Na+", "K+", "Mg2+"], correct: 0, lang: "ua" },
-                        { q: "Which ion is required for muscle contraction (actin-myosin binding)?", options: ["Ca2+", "Na+", "K+", "Mg2+"], correct: 0, lang: "en" }
-                    ]
-                },
-                {
-                    id: "ps-5",
-                    title: "Ендокринна система та ВНД",
-                    content: `
-                        <div class="krok-marker">Типи ВНД:</div>
-                        <p><strong>Сангвінік:</strong> Сильний, врівноважений, рухливий.</p>
-                        <p><strong>Холерик:</strong> Сильний, НЕврівноважений.</p>
-                        <p><strong>Тироксин:</strong> Надлишок — тахікардія, схуднення (Базедова хвороба).</p>
-                    `,
-                    questions: [
-                        { q: "Хворий схуд, екзофтальм, ЧСС 120. Надлишок якого гормону?", options: ["Тироксин", "Інсулін", "Кортизол", "Глюкагон"], correct: 0, lang: "ua" },
-                        { q: "A patient has weight loss, exophthalmos, tachycardia. Excess of which hormone?", options: ["Thyroxine", "Insulin", "Cortisol", "Glucagon"], correct: 0, lang: "en" },
-                        { q: "Людина сильна, врівноважена, інертна. Який це тип темпераменту?", options: ["Флегматик", "Сангвінік", "Холерик", "Меланхолік"], correct: 0, lang: "ua" },
-                        { q: "A person is strong, balanced, and inert. Which temperament type is this?", options: ["Phlegmatic", "Sanguine", "Choleric", "Melancholic"], correct: 0, lang: "en" }
-                    ]
-                }
+    id: "physio",
+    title: "Фізіологія",
+    en: "Physiology",
+    topics: [
+        {
+            id: "ps-1",
+            title: "Збудливі тканини та Нерви",
+            content: `<div class="krok-marker">Деполяризація: Na+ в клітину. Реполяризація: K+ з клітини.</div>`,
+            questions: [
+                { q: "Який іон відповідає за фазу деполяризації?", options: ["Na+", "K+", "Ca2+", "Mg2+"], correct: 0, lang: "ua" },
+                { q: "Which ion is responsible for depolarization?", options: ["Na+", "K+", "Ca2+", "Mg2+"], correct: 0, lang: "en" },
+                { q: "Поріг подразнення зріс. Як змінилась збудливість?", options: ["Зменшилась", "Зросла", "Не змінилась", "Зникла"], correct: 0, lang: "ua" },
+                { q: "Stimulation threshold increased. Excitability is:", options: ["Decreased", "Increased", "No change", "Zero"], correct: 0, lang: "en" },
+                { q: "Медіатор у нервово-м'язовому синапсі:", options: ["Ацетилхолін", "Адреналін", "Дофамін", "Серотонін"], correct: 0, lang: "ua" },
+                { q: "Neurotransmitter in the neuromuscular junction:", options: ["Acetylcholine", "Epinephrine", "Dopamine", "Serotonin"], correct: 0, lang: "en" },
+                { q: "Блокада Na+/K+ насоса призведе до:", options: ["Зникнення ПС", "Росту ПС", "Гіперполяризації", "Нічого"], correct: 0, lang: "ua" },
+                { q: "Blocking the Na+/K+ pump will lead to:", options: ["Loss of resting potential", "Increase of RP", "Hyperpolarization", "No effect"], correct: 0, lang: "en" },
+                { q: "Фаза реполяризації зумовлена:", options: ["Виходом K+", "Входом Na+", "Входом Ca2+", "Виходом Na+"], correct: 0, lang: "ua" },
+                { q: "Repolarization phase is caused by:", options: ["K+ efflux", "Na+ influx", "Ca2+ influx", "Na+ efflux"], correct: 0, lang: "en" }
             ]
         },
+        {
+            id: "ps-2",
+            title: "Кров та Імунітет",
+            content: `<div class="krok-marker">КП = 0.85-1.05. Група I(0) - без антигенів.</div>`,
+            questions: [
+                { q: "КП = 0.7. Яка анемія?", options: ["Гіпохромна", "Гіперхромна", "Нормохромна", "B12"], correct: 0, lang: "ua" },
+                { q: "Color index is 0.7. Which anemia?", options: ["Hypochromic", "Hyperchromic", "Normochromic", "B12"], correct: 0, lang: "en" },
+                { q: "Група крові, де немає аглютинінів (антитіл):", options: ["IV(AB)", "I(0)", "II(A)", "III(B)"], correct: 0, lang: "ua" },
+                { q: "Blood group with no agglutinins in plasma:", options: ["IV(AB)", "I(0)", "II(A)", "III(B)"], correct: 0, lang: "en" },
+                { q: "Дефіцит якого вітаміну порушує зсідання крові?", options: ["K", "C", "A", "E"], correct: 0, lang: "ua" },
+                { q: "Which vitamin deficiency impairs blood clotting?", options: ["K", "C", "A", "E"], correct: 0, lang: "en" },
+                { q: "Осмотичний тиск плазми крові переважно створюють:", options: ["NaCl", "Білки", "Глюкоза", "Сечовина"], correct: 0, lang: "ua" },
+                { q: "Osmotic pressure of blood plasma is mainly created by:", options: ["NaCl", "Proteins", "Glucose", "Urea"], correct: 0, lang: "en" },
+                { q: "Для еритропоезу необхідно:", options: ["B12 та залізо", "Вітамін С", "Магній", "Інсулін"], correct: 0, lang: "ua" },
+                { q: "Required for erythropoiesis:", options: ["B12 and Iron", "Vitamin C", "Magnesium", "Insulin"], correct: 0, lang: "en" }
+            ]
+        },
+        {
+            id: "ps-3",
+            title: "ССС та Дихання",
+            content: `<div class="krok-marker">QRS - шлуночки. Сурфактант - альвеоли.</div>`,
+            questions: [
+                { q: "На ЕКГ відсутній зубець P. Де водій ритму?", options: ["АВ-вузол", "СА-вузол", "Пучок Гіса", "Пуркін'є"], correct: 0, lang: "ua" },
+                { q: "P wave is absent. Where is the pacemaker?", options: ["AV node", "SA node", "His bundle", "Purkinje"], correct: 0, lang: "en" },
+                { q: "Що не дає альвеолам спадатися?", options: ["Сурфактант", "Азот", "Слиз", "Хрящ"], correct: 0, lang: "ua" },
+                { q: "What prevents alveoli from collapsing?", options: ["Surfactant", "Nitrogen", "Mucus", "Cartilage"], correct: 0, lang: "en" },
+                { q: "Зубець T на ЕКГ — це:", options: ["Реполяризація шлуночків", "Деполяризація", "Збудження передсердь", "Скорочення"], correct: 0, lang: "ua" },
+                { q: "T wave on ECG reflects:", options: ["Ventricular repolarization", "Depolarization", "Atrial excitation", "Contraction"], correct: 0, lang: "en" },
+                { q: "Як вагус впливає на серце?", options: ["Уповільнює ЧСС", "Прискорює ЧСС", "Збільшує силу", "Не впливає"], correct: 0, lang: "ua" },
+                { q: "How does the vagus nerve affect the heart?", options: ["Decreases HR", "Increases HR", "Increases force", "No effect"], correct: 0, lang: "en" },
+                { q: "ЖЄЛ — це сума:", options: ["ДО+РОвд+РОвид", "ДО+ЗОб", "РОвд+ЗОб", "ДО+РОвд"], correct: 0, lang: "ua" },
+                { q: "Vital capacity (VC) is a sum of:", options: ["TV+IRV+ERV", "TV+RV", "IRV+RV", "TV+IRV"], correct: 0, lang: "en" }
+            ]
+        },
+        {
+            id: "ps-4",
+            title: "Травлення та Виділення",
+            content: `<div class="krok-marker">Ентерокіназа -> Трипсин. Реабсорбція глюкози.</div>`,
+            questions: [
+                { q: "Що активує трипсиноген?", options: ["Ентерокіназа", "Пепсин", "Жовч", "HCl"], correct: 0, lang: "ua" },
+                { q: "What activates trypsinogen?", options: ["Enterokinase", "Pepsin", "Bile", "HCl"], correct: 0, lang: "en" },
+                { q: "Жовч потрібна для:", options: ["Емульгації жирів", "Розщеплення білків", "Всмоктування глюкози", "Секреції HCl"], correct: 0, lang: "ua" },
+                { q: "Bile is required for:", options: ["Fat emulsification", "Protein breakdown", "Glucose absorption", "HCl secretion"], correct: 0, lang: "en" },
+                { q: "Де відбувається основна реабсорбція глюкози?", options: ["Проксимальні канальці", "Петля Генле", "Дистальні канальці", "Клубочок"], correct: 0, lang: "ua" },
+                { q: "Where does the main glucose reabsorption occur?", options: ["Proximal tubules", "Loop of Henle", "Distal tubules", "Glomerulus"], correct: 0, lang: "en" },
+                { q: "При якому АТ припиняється фільтрація в нирках?", options: ["< 70 мм рт.ст.", "120 мм рт.ст.", "90 мм рт.ст.", "150 мм рт.ст."], correct: 0, lang: "ua" },
+                { q: "At what BP does renal filtration stop?", options: ["< 70 mmHg", "120 mmHg", "90 mmHg", "150 mmHg"], correct: 0, lang: "en" },
+                { q: "Гормон, що збільшує реабсорбцію води:", options: ["Вазопресин (АДГ)", "Альдостерон", "Інсулін", "Окситоцин"], correct: 0, lang: "ua" },
+                { q: "Hormone that increases water reabsorption:", options: ["Vasopressin (ADH)", "Aldosterone", "Insulin", "Oxytocin"], correct: 0, lang: "en" }
+            ]
+        },
+        {
+            id: "ps-5",
+            title: "Ендокринна та ВНД",
+            content: `<div class="krok-marker">Інсулін знижує цукор. Сангвінік - сильний врівноважений.</div>`,
+            questions: [
+                { q: "Хворий схуд, ЧСС 120, екзофтальм. Який гормон?", options: ["Тироксин", "Інсулін", "Кортизол", "Глюкагон"], correct: 0, lang: "ua" },
+                { q: "Weight loss, HR 120, exophthalmos. Which hormone?", options: ["Thyroxine", "Insulin", "Cortisol", "Glucagon"], correct: 0, lang: "en" },
+                { q: "Людина сильна, врівноважена, рухлива. Тип:", options: ["Сангвінік", "Холерик", "Флегматик", "Меланхолік"], correct: 0, lang: "ua" },
+                { q: "Person is strong, balanced, mobile. Type:", options: ["Sanguine", "Choleric", "Phlegmatic", "Melancholic"], correct: 0, lang: "en" },
+                { q: "Який гормон знижує рівень глюкози в крові?", options: ["Інсулін", "Глюкагон", "Адреналін", "Кортизол"], correct: 0, lang: "ua" },
+                { q: "Which hormone decreases blood glucose levels?", options: ["Insulin", "Glucagon", "Epinephrine", "Cortisol"], correct: 0, lang: "en" },
+                { q: "Друга сигнальна система — це:", options: ["Мова (слово)", "Світло", "Звук", "Смак"], correct: 0, lang: "ua" },
+                { q: "The second signal system is:", options: ["Speech (word)", "Light", "Sound", "Taste"], correct: 0, lang: "en" },
+                { q: "Тип ВНД — сильний, неврівноважений:", options: ["Холерик", "Сангвінік", "Флегматик", "Меланхолік"], correct: 0, lang: "ua" },
+                { q: "Temperament type — strong, unbalanced:", options: ["Choleric", "Sanguine", "Phlegmatic", "Melancholic"], correct: 0, lang: "en" }
+            ]
+        }
+    ]
+},
         {
             id: "pharma",
             title: "Фармакологія",
